@@ -1,0 +1,4 @@
+.env
+.vscode
+*.xlsx
+errors.txt
