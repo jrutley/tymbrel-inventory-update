@@ -3,3 +3,5 @@
 *.xlsx
 errors.txt
 __pycache__/
+dist/
+build/

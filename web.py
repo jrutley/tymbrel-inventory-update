@@ -12,7 +12,7 @@ def setup():
   session.headers['user-agent']="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36"
   url = "https://www.tymbrel.com/manage/login/"
   session.get(url)
-  payload = {'username': os.getenv("USERNAME"), 'password': os.getenv("PASSWORD"), 'Login': 'Login'}
+  payload = {'username': os.getenv("USER_EMAIL"), 'password': os.getenv("PASSWORD"), 'Login': 'Login'}
   session.post(url, payload)
   website_code = os.getenv("WEBSITECODE")
   url = f"https://www.tymbrel.com/manage/jump/?Target={website_code}"
@@ -66,6 +66,9 @@ def get_content_id(sku: str, name: str, skuName: str, useSku: bool, session) -> 
     searchCriteria = name
   searchPath = f"https://www.tymbrel.com/cmsi-data/searchapp?simplecartproductsearch={searchCriteria}"
   response = session.get(searchPath)
+
+  # If we see a login/password field here, it failed to log in
+
   products = json.loads(response.text)
   return extract_product_id_from_products(products, name, sku, skuName)
 
