@@ -1,4 +1,5 @@
 import os
+import argparse
 from dotenv import load_dotenv
 from typing import List
 from openpyxl import load_workbook
@@ -14,9 +15,17 @@ def assignValues(headerTuple) -> dict:
   return valueDict
 
 if __name__ == "__main__":
-  importCsv: str = os.getenv("IMPORT_CSV")
-  if not importCsv:
-    raise ValueError("IMPORT_CSV cannot be blank")
+
+  parser = argparse.ArgumentParser(description='Update inventory in Tymbrel')
+  parser.add_argument('filename', type=str, nargs=1, default='Inventory.xlsx',
+                      help='the Excel file containing inventory items')
+
+  args = parser.parse_args()
+  importCsv: str = args.filename[0]
+  
+  if not os.path.exists(importCsv):
+    print(f"Couldn't find {importCsv} in the current folder")
+    exit(1)
 
   workbook = load_workbook(filename=importCsv)
   sheet = workbook[workbook.sheetnames[0]]
