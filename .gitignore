@@ -5,3 +5,4 @@ errors.txt
 __pycache__/
 dist/
 build/
+*.spec
