@@ -4,6 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pylint = "*"
 
 [packages]
 python-dotenv = "*"
@@ -11,6 +12,7 @@ openpyxl = "*"
 requests = "*"
 bs4 = "*"
 html5lib = "*"
+pyinstaller = "*"
 
 [requires]
 python_version = "3"
